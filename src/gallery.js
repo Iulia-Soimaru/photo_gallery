@@ -1,7 +1,8 @@
 export default class Gallery {
   constructor(json) {
+    this.stat = json.stat;
+    this.title = json.photoset.title;
     this.photo = json.photoset.photo;
-    console.log(this.photo)
   }
 
   buildImageUrl = (photoObj) => {
@@ -39,12 +40,13 @@ export default class Gallery {
   }
 
   addGalleryToView = () => {
-    const photo = this.flickr.photo[0];
-    const ul = this.createGalleryList();
+    if(this.stat === 'ok') {
+      const ul = this.createGalleryList();
 
-    photo.forEach(function(photoObj){
-      let li = this.createGalleryItem(photoObj);
-      ul.appendChild(li);
-    })
+      this.photo.forEach((photoObj) => {
+        let li = this.createGalleryItem(photoObj);
+        ul.appendChild(li);
+      })
+    }
   }
 }

@@ -3,7 +3,8 @@ import Gallery from './gallery';
 
 class App {
   createGallery = (json) => {
-    new Gallery(json);
+    const gallery = new Gallery(json);
+    gallery.addGalleryToView();
   }
 
   flickrApiCall = () => {

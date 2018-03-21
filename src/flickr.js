@@ -1,4 +1,3 @@
-// https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ebc7e0bc0d4517a47c79db1e1bc449b1&photoset_id=72157650609588450&format=json
 export default class Flickr {
   constructor(callback) {
     this.callback = callback;
