@@ -4,7 +4,10 @@ body {
 }
 
 img {
+  cursor: pointer;
   user-select: none;
+  max-width: 100%;
+  max-height: 100%;
 }
 
 :root {
@@ -55,12 +58,6 @@ img {
   height: 300px;
 }
 
-.c-gallery__image {
-  max-width: 100%;
-  max-height: 100%;
-  cursor: pointer;
-}
-
 .c-modal {
   position: fixed;
   top: 0;
@@ -96,10 +93,6 @@ img {
 
 .c-modal-arrow__right::before {
   content: '>';
-}
-
-.c-modal-image {
-  cursor: pointer;
 }
 
 .c-modal-image__title {
