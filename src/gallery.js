@@ -8,8 +8,7 @@ export default class Gallery {
   // @params {object} photo object
   // @return {string} photo src url
   buildImageUrl = (photoObj) => {
-    const src = `http://farm${photoObj.farm}.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}.jpg`;
-    return src;
+    return `http://farm${photoObj.farm}.staticflickr.com/${photoObj.server}/${photoObj.id}_${photoObj.secret}.jpg`;
   }
 
   // @params {object} photo object
@@ -27,7 +26,7 @@ export default class Gallery {
     // create DOM elements with classNames
     const main = document.getElementById('gallery');
     const ul = document.createElement('ul');
-    ul.className = 'c-gallery__list';
+    ul.className = 'c-gallery--list';
 
     main.appendChild(ul);
     return ul;
@@ -39,8 +38,8 @@ export default class Gallery {
     // create DOM elements with classNames
     let li = document.createElement('li');
     let img = document.createElement('img');
-    li.className = 'c-gallery__item';
-    img.className = 'c-gallery__image';
+    li.className = 'c-gallery--item';
+    img.className = 'c-gallery--image';
 
     let imageObj = this.buildImageObjForDom(photoObj);
 
@@ -48,7 +47,7 @@ export default class Gallery {
     img.src = imageObj['src'];
     img.alt = imageObj['alt'];
     img.id = imageObj['id'];
-    img.addEventListener("click", this.previewImage);
+    img.addEventListener('click', this.previewImage);
 
     li.appendChild(img);
     return li;
@@ -67,8 +66,10 @@ export default class Gallery {
       });
 
       // add click functions to arrow in modal (prev and next)
-      document.querySelector('.c-modal-arrow__left').addEventListener('click', this.previewPrev);
-      document.querySelector('.c-modal-arrow__right').addEventListener('click', this.previewNext);
+      document.querySelector('.c-modal-arrow--left').addEventListener('click', this.previewPrev);
+      document.querySelector('.c-modal-arrow--right').addEventListener('click', this.previewNext);
+    } else {
+      alert('Something went wrong, please refresh the page');
     }
   }
 
@@ -78,14 +79,14 @@ export default class Gallery {
   changePreviewImage = (domObj, photoObj) => {
     // get DOM elements
     const modalImage = document.querySelector('.c-modal-image');
-    const imageTitle = document.querySelector('.c-modal-image__title');
+    const imageTitle = document.querySelector('.c-modal-image--title');
     const photo = domObj || this.buildImageObjForDom(photoObj);
 
     // update image attributes
     modalImage.src = photo.src;
     modalImage.alt = photo.alt;
     imageTitle.innerHTML = photo.alt;
-    modalImage.addEventListener("click", this.closeModal);
+    modalImage.addEventListener('click', this.closeModal);
   }
 
   // @params {MouseEvent} click event
@@ -115,8 +116,8 @@ export default class Gallery {
   // @params {HTMLElement} button, arrow element
   // @return {undefined}
   checkToDisableArrow = (element) => {
-    const left = document.querySelector('.c-modal-arrow__left');
-    const right = document.querySelector('.c-modal-arrow__right');
+    const left = document.querySelector('.c-modal-arrow--left');
+    const right = document.querySelector('.c-modal-arrow--right');
 
     if(this.currentIndex === 0) {
       left.classList.add('disabled');
@@ -132,22 +133,25 @@ export default class Gallery {
     right.classList.remove('disabled');
   }
 
+  // @params {number} index
   // @return {undefined}
-  previewPrev = () => {
-    const photoObj = this.photo[this.currentIndex - 1];
+  swapImage = (index) => {
+    const photoObj = this.photo[index];
     if (photoObj) {
       this.changePreviewImage(null, photoObj);
     }
+  }
+
+  // @return {undefined}
+  previewPrev = () => {
+    this.swapImage(this.currentIndex - 1);
     this.currentIndex -= 1;
     this.checkToDisableArrow();
   }
 
   // @return {undefined}
   previewNext = () => {
-    const photoObj = this.photo[this.currentIndex + 1];
-    if (photoObj) {
-      this.changePreviewImage(null, photoObj);
-    }
+    this.swapImage(this.currentIndex + 1);
     this.currentIndex += 1;
     this.checkToDisableArrow();
   }

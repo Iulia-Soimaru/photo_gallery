@@ -39,7 +39,7 @@ img {
   min-height: 100vh;
 }
 
-.c-gallery__list {
+.c-gallery--list {
   list-style: none;
   display: flex;
   padding: 0;
@@ -47,7 +47,7 @@ img {
   justify-content: center;
 }
 
-.c-gallery__item {
+.c-gallery--item {
   margin: 10px;
   background: var(--light-grey);
   padding: 15px;
@@ -87,15 +87,15 @@ img {
   text-shadow: 0px 1px 1px var(--white);
 }
 
-.c-modal-arrow__left::before {
+.c-modal-arrow--left::before {
   content: '<';
 }
 
-.c-modal-arrow__right::before {
+.c-modal-arrow--right::before {
   content: '>';
 }
 
-.c-modal-image__title {
+.c-modal-image--title {
   color: var(--white);
   text-align: center;
 }

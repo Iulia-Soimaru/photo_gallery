@@ -10,7 +10,7 @@ export default class Flickr {
     const photosetId = '72157646084694683';
     const format = 'json';
     const callback = 'jsonFlickrApi';
-    return restApi.concat(`?method=${method}&api_key=${apiKey}&photoset_id=${photosetId}&format=${format}&callback=${callback}`)
+    return `${restApi}?method=${method}&api_key=${apiKey}&photoset_id=${photosetId}&format=${format}&callback=${callback}`
   }
 
   init = () => {
